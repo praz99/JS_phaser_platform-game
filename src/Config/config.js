@@ -1,17 +1,17 @@
 import Phaser from 'phaser';
 
-let gameConfig = {
+const gameConfig = {
   type: Phaser.AUTO,
   parent: 'phaser-example',
   width: 1430,
   height: 680,
   backgroundColor: 0x0c88c7,
   physics: {
-    default: "arcade"
-  }
+    default: 'arcade',
+  },
 };
 
-let gameOptions = {
+const gameOptions = {
   platformSpeedRange: [300, 300],
 
   // mountain speed, in pixels per second
@@ -49,7 +49,7 @@ let gameOptions = {
   coinPercent: 25,
 
   // % of probability a fire appears on the platform
-  firePercent: 25
+  firePercent: 25,
 };
 
-export { gameConfig, gameOptions }
+export { gameConfig, gameOptions };
