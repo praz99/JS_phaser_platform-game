@@ -1,0 +1,43 @@
+import Phaser from 'phaser';
+
+export default class LoginScene extends Phaser.Scene {
+  constructor() {
+    super('Login');
+  }
+
+  preload() {
+    this.load.html('nameform', 'assets/nameForm.html');
+  }
+
+  create() {
+    let text = this.add.text(300, 10, 'Please enter your name', { color: 'white', fontSize: '30px' });
+    let element = this.add.dom(400, 0).createFromCache('nameform');
+    element.addListener('click');
+    element.on('click', function(event) {
+      if (event.target.name === 'playButton') {
+        let inputText = this.getChildByName('nameField');
+        if (inputText.value !== '') {
+          this.removeListener('click');
+          this.setVisible(false);
+          text.setText(inputText.value);
+          this.setText('Welcome ' + inputText.value);
+          window.game.scene.start('Title');
+        } else {
+          this.scene.tweens.add({
+            targets: text,
+            alpha: 0.2,
+            duration: 250,
+            ease: 'Power3',
+            yoyo: true,
+          });
+        }
+      }
+    });
+    this.tweens.add({
+      targets: element,
+      y: 300,
+      duration: 3000,
+      ease: 'Power3',
+    });
+  }
+}

@@ -124,8 +124,7 @@ export default class GameScene extends Phaser.Scene {
       this.dieMusic = this.sound.add('dead', { volume: 0.5, loop: false });
       this.dieMusic.play();
       this.dying = true;
-      this.player.anims.stop();
-      this.player.anims.play('dead');
+      this.player.anims.play('dead', false);
       this.player.body.setVelocityY(-200);
       this.physics.world.removeCollider(this.platformCollider);
     }, null, this);
@@ -231,13 +230,6 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  collectCoins(player, star) {
-    star.disableBody(true, true);
-
-    this.score += 10;
-    this.scoreText.setText('Score: ' + this.score);
-  }
-
   // the player jumps when on the ground, or once in the air as long as there are jumps left and the first jump was on the ground
   // and obviously if the player is not dying
   jump() {
@@ -248,9 +240,8 @@ export default class GameScene extends Phaser.Scene {
       this.player.setVelocityY(gameOptions.jumpForce * -1);
       this.playerJumps++;
 
-      // stops animation
-      this.player.anims.stop('run');
-      this.player.anims.play('jump');
+      // stops run animation and play jump animation
+      this.player.anims.play('jump', false);
     }
   }
 
