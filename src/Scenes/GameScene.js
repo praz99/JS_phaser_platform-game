@@ -7,15 +7,6 @@ export default class GameScene extends Phaser.Scene {
     super('Game');
   }
 
-  // preload() {
-  //   // load images
-  //   this.load.image('ph_logo', 'assets/logo.png');
-  // }
-
-  // create() {
-  //   this.add.image(400, 300, 'ph_logo');
-  // }
-
   create() {
     // group with all active mountains.
     this.mountainGroup = this.add.group();
@@ -87,7 +78,7 @@ export default class GameScene extends Phaser.Scene {
     this.addPlatform(gameConfig.width, gameConfig.width / 2, gameConfig.height * gameOptions.platformVerticalLimit[1]);
 
     // adding the player;
-    this.player = this.physics.add.sprite(gameOptions.playerStartPosition, gameConfig.height * 0.7, 'player');
+    this.player = this.physics.add.sprite(gameOptions.playerStartPosition, gameConfig.height * 0.7, 'player_run');
     this.player.setGravityY(gameOptions.playerGravity);
     this.player.setDepth(2);
 
@@ -122,7 +113,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.fireGroup, function (player, fire) {
       this.dying = true;
       this.player.anims.stop();
-      this.player.setFrame(2);
+      this.player.anims.play('dead');
       this.player.body.setVelocityY(-200);
       this.physics.world.removeCollider(this.platformCollider);
     }, null, this);
@@ -236,7 +227,8 @@ export default class GameScene extends Phaser.Scene {
       this.playerJumps++;
 
       // stops animation
-      this.player.anims.stop();
+      this.player.anims.stop('run');
+      this.player.anims.play('jump');
     }
   }
 

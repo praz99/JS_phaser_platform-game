@@ -87,9 +87,19 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('checkedBox', 'assets/ui/blue_boxCheckmark.png');
 
     this.load.image('platform', 'assets/platform.png');
-    // player is a sprite sheet made by 24x48 pixels
-    this.load.spritesheet('player', 'assets/player.png', {
-      frameWidth: 24,
+    // player is a sprite sheet made by 52.26x48 pixels
+    this.load.spritesheet('player_run', 'assets/player_run.png', {
+      frameWidth: 52.26,
+      frameHeight: 48,
+    });
+
+    this.load.spritesheet('player_jump', 'assets/player_jump.png', {
+      frameWidth: 52.26,
+      frameHeight: 48,
+    });
+
+    this.load.spritesheet('player_dead', 'assets/player_dead.png', {
+      frameWidth: 52.26,
       frameHeight: 48,
     });
 
@@ -114,14 +124,36 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   create() {
-    // setting player animation
+    // setting player running animation
     this.anims.create({
       key: 'run',
-      frames: this.anims.generateFrameNumbers('player', {
+      frames: this.anims.generateFrameNumbers('player_run', {
         start: 0,
-        end: 1,
+        end: 14,
       }),
-      frameRate: 8,
+      frameRate: 20,
+      repeat: -1,
+    });
+
+    // setting player jumping animation
+    this.anims.create({
+      key: 'jump',
+      frames: this.anims.generateFrameNumbers('player_jump', {
+        start: 0,
+        end: 14,
+      }),
+      frameRate: 15,
+      repeat: -1,
+    });
+
+    // setting player dead animation
+    this.anims.create({
+      key: 'dead',
+      frames: this.anims.generateFrameNumbers('player_dead', {
+        start: 0,
+        end: 14,
+      }),
+      frameRate: 15,
       repeat: -1,
     });
 
