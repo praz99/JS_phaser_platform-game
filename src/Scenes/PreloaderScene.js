@@ -121,6 +121,8 @@ export default class PreloaderScene extends Phaser.Scene {
       frameHeight: 512,
     });
     this.load.audio('bgMusic', ['assets/TownTheme.mp3']);
+    this.load.audio('pickup', ['assets/pickup.mp3']);
+    this.load.audio('dead', ['assets/dead.mp3']);
   }
 
   create() {
