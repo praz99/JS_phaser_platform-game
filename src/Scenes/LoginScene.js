@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { gameConfig } from '../Config/config';
 
 export default class LoginScene extends Phaser.Scene {
   constructor() {
@@ -20,7 +21,7 @@ export default class LoginScene extends Phaser.Scene {
           this.removeListener('click');
           this.setVisible(false);
           text.setText(inputText.value);
-          this.setText('Welcome ' + inputText.value);
+          gameConfig.user = inputText.value;
           window.game.scene.start('Title');
         } else {
           this.scene.tweens.add({

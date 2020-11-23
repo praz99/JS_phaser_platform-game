@@ -1,30 +1,35 @@
 import Phaser from 'phaser';
 import { gameConfig } from '../Config/config';
 
-export default class CreditsScene extends Phaser.Scene {
+export default class GameOverScene extends Phaser.Scene {
   constructor() {
-    super('Credits');
+    super('GameOver');
+  }
+
+  init (data) {
+    this.username = data.user;
+    this.finalScore = data.score;
   }
 
   create() {
-    this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
-    this.madeByText = this.add.text(0, 0, 'Created By: Prajwal Thapa', { fontSize: '26px', fill: '#fff' });
+    this.gameOverText = this.add.text(0, 0, 'Game Over', { fontSize: '32px', fill: '#fff' });
+    this.scoreText = this.add.text(0, 0, `You scored: ${ this.finalScore }`, { fontSize: '26px', fill: '#fff' });
     this.zone = this.add.zone(gameConfig.width / 2, gameConfig.height / 2, gameConfig.width, gameConfig.height);
 
     Phaser.Display.Align.In.Center(
-      this.creditsText,
+      this.gameOverText,
       this.zone,
     );
 
     Phaser.Display.Align.In.Center(
-      this.madeByText,
+      this.scoreText,
       this.zone,
     );
 
-    this.madeByText.setY(1000);
+    this.scoreText.setY(1000);
 
     this.creditsTween = this.tweens.add({
-      targets: this.creditsText,
+      targets: this.gameOverText,
       y: -100,
       ease: 'Power1',
       duration: 3000,
@@ -35,14 +40,14 @@ export default class CreditsScene extends Phaser.Scene {
     });
 
     this.madeByTween = this.tweens.add({
-      targets: this.madeByText,
+      targets: this.scoreText,
       y: -300,
       ease: 'Power1',
       duration: 8000,
       delay: 1000,
       onComplete: function () {
         this.madeByTween.destroy;
-        this.scene.start('Title');
+        // this.scene.start('Title');
       }.bind(this),
     });
   }

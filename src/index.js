@@ -8,14 +8,13 @@ import OptionsScene from './Scenes/OptionsScene';
 import CreditsScene from './Scenes/CreditsScene';
 import Model from './Model';
 import LoginScene from './Scenes/LoginScene';
-
-let user;
+import GameOverScene from './Scenes/GameOverScene';
 
 class Game extends Phaser.Game {
   constructor() {
     super(gameConfig);
     const model = new Model();
-    this.globals = { model, bgMusic: null, user = '' };
+    this.globals = { model, bgMusic: null };
     this.scene.add('Boot', BootScene);
     this.scene.add('Preloader', PreloaderScene);
     this.scene.add('Login', LoginScene);
@@ -23,6 +22,7 @@ class Game extends Phaser.Game {
     this.scene.add('Options', OptionsScene);
     this.scene.add('Credits', CreditsScene);
     this.scene.add('Game', GameScene);
+    this.scene.add('GameOver', GameOverScene);
     this.scene.start('Boot');
   }
 }
