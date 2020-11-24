@@ -20,7 +20,7 @@ export default class LoginScene extends Phaser.Scene {
         if (inputText.value !== '') {
           this.removeListener('click');
           this.setVisible(false);
-          text.setText(inputText.value);
+          text.setText('player: ' + inputText.value);
           gameConfig.user = inputText.value;
           window.game.scene.start('Title');
         } else {

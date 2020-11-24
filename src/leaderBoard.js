@@ -1,5 +1,5 @@
+const URL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/pUSZ5NTzWWRBiQrQHoFp/scores'
 const sendScore = (username, score) => {
-  const URL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/pUSZ5NTzWWRBiQrQHoFp/scores'
   const data =(
     {
       "user": username,
@@ -15,14 +15,20 @@ const sendScore = (username, score) => {
   })
 }
 
-const showScore = () => {
-  const URL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/pUSZ5NTzWWRBiQrQHoFp/scores'
-  // Send a GET request without any data to the server
-  fetch(URL, {method: "GET"})
-  // Get the JSON data from the raw response
-    .then(res => res.json())
-  // Print the result
-    .then(console.log)
-}
+const showScore = async () => {
+  const response = await fetch(URL, {
+    method: 'Get',
+    mode: 'cors',
+    headers: {
+      Accept: 'Application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  if (response.ok) {
+    return response.json();
+  }
+  throw new Error('Error!');
+};
+
 
 export { sendScore, showScore };

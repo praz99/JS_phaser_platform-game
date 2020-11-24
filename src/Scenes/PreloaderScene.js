@@ -144,7 +144,7 @@ export default class PreloaderScene extends Phaser.Scene {
         end: 14,
       }),
       frameRate: 15,
-      repeat: -1,
+      repeat: 0,
     });
 
     // setting player dead animation
@@ -155,7 +155,7 @@ export default class PreloaderScene extends Phaser.Scene {
         end: 14,
       }),
       frameRate: 15,
-      repeat: -1,
+      repeat: 0,
     });
 
     // setting coin animation
