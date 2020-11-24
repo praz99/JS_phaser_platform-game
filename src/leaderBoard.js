@@ -1,18 +1,18 @@
 const URL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/pUSZ5NTzWWRBiQrQHoFp/scores';
-const sendScore = (username, score) => {
-  const data = (
-    {
-      user: username,
-      score,
-    });
-  // Send a post request
-  fetch(URL, {
+const sendScore = async (name, score) => {
+  const response = await fetch(URL, {
     method: 'POST',
-    body: JSON.stringify(data),
+    mode: 'cors',
     headers: {
-      'Content-type': 'application/json; charset=UTF-8',
+      Accept: 'Application/json',
+      'Content-Type': 'application/json',
     },
+    body: JSON.stringify({ user: name, score: Number(score) }),
   });
+  if (response.ok) {
+    return response.json();
+  }
+  throw new Error('Error!');
 };
 
 const showScore = async () => {
