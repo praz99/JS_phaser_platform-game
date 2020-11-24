@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 import { gameConfig } from '../Config/config';
+import * as leaderBoard from '../leaderBoard';
+import Button from '../Objects/Button';
 
 export default class GameOverScene extends Phaser.Scene {
   constructor() {
@@ -11,10 +13,19 @@ export default class GameOverScene extends Phaser.Scene {
     this.finalScore = data.score;
   }
 
+  preload() {
+    
+  }
+
   create() {
+    leaderBoard.sendScore(this.username, this.finalScore);
     this.gameOverText = this.add.text(0, 0, 'Game Over', { fontSize: '32px', fill: '#fff' });
     this.scoreText = this.add.text(0, 0, `You scored: ${ this.finalScore }`, { fontSize: '26px', fill: '#fff' });
     this.zone = this.add.zone(gameConfig.width / 2, gameConfig.height / 2, gameConfig.width, gameConfig.height);
+
+    this.restartButton = new Button(this, gameConfig.width / 2, gameConfig.height / 2 - 100, 'blueButton1', 'blueButton2', 'Play Again', 'Game');
+    this.homeButton = new Button(this, gameConfig.width / 2, gameConfig.height / 2, 'blueButton1', 'blueButton2', 'Home', 'Login');
+    this.leaderBoardButton = new Button(this, gameConfig.width / 2, gameConfig.height / 2 + 100, 'blueButton1', 'blueButton2', 'Leaderboard', 'Game');
 
     Phaser.Display.Align.In.Center(
       this.gameOverText,
