@@ -29,7 +29,9 @@ export default class TitleScene extends Phaser.Scene {
   centerButton(gameObject, offset = 0) {
     Phaser.Display.Align.In.Center(
       gameObject,
-      this.add.zone(gameConfig.width / 2, gameConfig.height / 2 - offset * 100, gameConfig.width, gameConfig.height),
+      this.add.zone(gameConfig.width / 2,
+        gameConfig.height / 2 - offset * 100,
+        gameConfig.width, gameConfig.height),
     );
   }
 

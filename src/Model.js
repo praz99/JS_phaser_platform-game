@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+
 export default class Model {
   constructor() {
     this._soundOn = true;
@@ -29,3 +31,5 @@ export default class Model {
     return this._bgMusicPlaying;
   }
 }
+
+/* eslint-enable no-underscore-dangle */

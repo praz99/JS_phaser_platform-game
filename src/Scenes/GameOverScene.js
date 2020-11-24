@@ -17,11 +17,42 @@ export default class GameOverScene extends Phaser.Scene {
     sendScore(this.username, this.finalScore);
     this.gameOverText = this.add.text(0, 0, 'Game Over', { fontSize: '32px', fill: '#fff' });
     this.scoreText = this.add.text(0, 0, `You scored: ${this.finalScore}`, { fontSize: '26px', fill: '#fff' });
-    this.zone = this.add.zone(gameConfig.width / 2, gameConfig.height / 2, gameConfig.width, gameConfig.height);
+    this.zone = this.add.zone(
+      gameConfig.width / 2,
+      gameConfig.height / 2,
+      gameConfig.width,
+      gameConfig.height,
+    );
 
-    this.restartButton = new Button(this, gameConfig.width / 2, gameConfig.height / 2 - 100, 'blueButton1', 'blueButton2', 'Play Again', 'Game');
-    this.homeButton = new Button(this, gameConfig.width / 2, gameConfig.height / 2, 'blueButton1', 'blueButton2', 'Home', 'Login');
-    this.leaderBoardButton = new Button(this, gameConfig.width / 2, gameConfig.height / 2 + 100, 'blueButton1', 'blueButton2', 'Leaderboard', 'LeaderBoard');
+    this.restartButton = new Button(
+      this,
+      gameConfig.width / 2,
+      gameConfig.height / 2 - 100,
+      'blueButton1',
+      'blueButton2',
+      'Play Again',
+      'Game',
+    );
+
+    this.homeButton = new Button(
+      this,
+      gameConfig.width / 2,
+      gameConfig.height / 2,
+      'blueButton1',
+      'blueButton2',
+      'Home',
+      'Login',
+    );
+
+    this.leaderBoardButton = new Button(
+      this,
+      gameConfig.width / 2,
+      gameConfig.height / 2 + 100,
+      'blueButton1',
+      'blueButton2',
+      'Leaderboard',
+      'LeaderBoard',
+    );
 
     Phaser.Display.Align.In.Center(
       this.gameOverText,
@@ -34,6 +65,8 @@ export default class GameOverScene extends Phaser.Scene {
     );
 
     this.scoreText.setY(1000);
+
+    /* eslint-disable no-unused-expressions */
 
     this.creditsTween = this.tweens.add({
       targets: this.gameOverText,
@@ -56,5 +89,7 @@ export default class GameOverScene extends Phaser.Scene {
         this.destroy;
       },
     });
+
+    /* eslint-enable no-unused-expressions */
   }
 }

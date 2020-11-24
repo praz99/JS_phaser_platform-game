@@ -9,7 +9,12 @@ export default class CreditsScene extends Phaser.Scene {
   create() {
     this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
     this.madeByText = this.add.text(0, 0, 'Created By: Prajwal Thapa', { fontSize: '26px', fill: '#fff' });
-    this.zone = this.add.zone(gameConfig.width / 2, gameConfig.height / 2, gameConfig.width, gameConfig.height);
+    this.zone = this.add.zone(
+      gameConfig.width / 2,
+      gameConfig.height / 2,
+      gameConfig.width,
+      gameConfig.height,
+    );
 
     Phaser.Display.Align.In.Center(
       this.creditsText,
@@ -22,6 +27,8 @@ export default class CreditsScene extends Phaser.Scene {
     );
 
     this.madeByText.setY(1000);
+
+    /* eslint-disable no-unused-expressions, func-names */
 
     this.creditsTween = this.tweens.add({
       targets: this.creditsText,
@@ -45,5 +52,7 @@ export default class CreditsScene extends Phaser.Scene {
         this.scene.start('Title');
       }.bind(this),
     });
+
+    /* eslint-enable no-unused-expressions, func-names */
   }
 }

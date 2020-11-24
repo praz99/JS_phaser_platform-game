@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
+
 import Phaser from 'phaser';
-import { showScore } from '../leaderBoard';
 import Button from '../Objects/Button';
+import { showScore } from '../leaderBoard';
 import { gameConfig } from '../Config/config';
 
 export default class leaderBoardScene extends Phaser.Scene {
@@ -22,3 +24,5 @@ export default class leaderBoardScene extends Phaser.Scene {
     }
   }
 }
+
+/* eslint-enable no-unused-vars */
