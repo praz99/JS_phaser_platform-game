@@ -35,7 +35,7 @@ export default class TitleScene extends Phaser.Scene {
 
   centerButtonText(gameText, gameButton) {
     Phaser.Display.Align.In.Center(
-      gameText,
+      this.gameText,
       gameButton,
     );
   }

@@ -112,7 +112,7 @@ export default class GameScene extends Phaser.Scene {
         callbackScope: this,
         onComplete() {
           this.score += 1;
-          this.scoreText.setText('Score: ' + this.score);
+          this.scoreText.setText(`Score: ${this.score}`);
           this.coinGroup.killAndHide(coin);
           this.coinGroup.remove(coin);
         },
@@ -238,7 +238,7 @@ export default class GameScene extends Phaser.Scene {
         this.playerJumps = 0;
       }
       this.player.setVelocityY(gameOptions.jumpForce * -1);
-      this.playerJumps++;
+      this.playerJumps += 1;
 
       // stops run animation and play jump animation
       this.player.anims.play('jump', false);

@@ -7,7 +7,7 @@ const gameConfig = {
   height: 680,
   backgroundColor: 0x0c88c7,
   dom: {
-    createContainer: true
+    createContainer: true,
   },
   physics: {
     default: 'arcade',
