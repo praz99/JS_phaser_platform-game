@@ -58,7 +58,7 @@ The rules are simple
 
 ## Live Demo Link <a name = "ll"></a>
 
-[Link For Play]()
+[Play Game Here](https://runner-game-praz.netlify.app/)
 
 
 ## Getting Started <a name = "gs"></a>
