@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 import Phaser from 'phaser';
 import { gameOptions, gameConfig } from '../Config/config';
 
@@ -126,7 +124,7 @@ export default class GameScene extends Phaser.Scene {
     }, null, this);
 
     // setting collisions between the player and the fire group
-    this.physics.add.overlap(this.player, this.fireGroup, function func3(player, fire) {
+    this.physics.add.overlap(this.player, this.fireGroup, function func3() {
       this.dieMusic = this.sound.add('dead', { volume: 0.5, loop: false });
       this.dieMusic.play();
       this.dying = true;
@@ -178,7 +176,6 @@ export default class GameScene extends Phaser.Scene {
       platform.active = true;
       platform.visible = true;
       this.platformPool.remove(platform);
-      const newRatio = platformWidth / platform.displayWidth;
       platform.displayWidth = platformWidth;
       platform.tileScaleX = 1 / platform.scaleX;
     } else {
@@ -246,9 +243,9 @@ export default class GameScene extends Phaser.Scene {
   // are jumps left and the first jump was on the ground
   // and obviously if the player is not dying
 
-  /* eslint-disable max-len */
   jump() {
-    if ((!this.dying) && (this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps))) {
+    if ((!this.dying) && (this.player.body.touching.down
+      || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps))) {
       if (this.player.body.touching.down) {
         this.playerJumps = 0;
       }
@@ -259,8 +256,6 @@ export default class GameScene extends Phaser.Scene {
       this.player.anims.play('jump', false);
     }
   }
-
-  /* eslint-enable max-len */
 
   update() {
     // game over
@@ -336,5 +331,3 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 }
-
-/* eslint-disable no-unused-vars */

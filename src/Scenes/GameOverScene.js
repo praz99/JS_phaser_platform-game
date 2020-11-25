@@ -66,17 +66,13 @@ export default class GameOverScene extends Phaser.Scene {
 
     this.scoreText.setY(1000);
 
-    /* eslint-disable no-unused-expressions */
-
     this.creditsTween = this.tweens.add({
       targets: this.gameOverText,
       y: -100,
       ease: 'Power1',
       duration: 3000,
       delay: 1000,
-      onComplete() {
-        this.destroy;
-      },
+      onComplete: this.destroy,
     });
 
     this.madeByTween = this.tweens.add({
@@ -85,11 +81,7 @@ export default class GameOverScene extends Phaser.Scene {
       ease: 'Power1',
       duration: 8000,
       delay: 1000,
-      onComplete() {
-        this.destroy;
-      },
+      onComplete: this.destroy,
     });
-
-    /* eslint-enable no-unused-expressions */
   }
 }

@@ -1,35 +1,31 @@
-/* eslint-disable no-underscore-dangle */
-
 export default class Model {
   constructor() {
-    this._soundOn = true;
-    this._musicOn = true;
-    this._bgMusicPlaying = false;
+    this.soundPlaying = true;
+    this.musicPlaying = true;
+    this.bgMusicPlaying = false;
   }
 
   set musicOn(value) {
-    this._musicOn = value;
+    this.musicPlaying = value;
   }
 
   get musicOn() {
-    return this._musicOn;
+    return this.musicPlaying;
   }
 
   set soundOn(value) {
-    this._soundOn = value;
+    this.soundPlaying = value;
   }
 
   get soundOn() {
-    return this._soundOn;
+    return this.soundPlaying;
   }
 
   set bgMusicPlaying(value) {
-    this._bgMusicPlaying = value;
+    this.bgMusicPlaying1 = value;
   }
 
   get bgMusicPlaying() {
-    return this._bgMusicPlaying;
+    return this.bgMusicPlaying1;
   }
 }
-
-/* eslint-enable no-underscore-dangle */

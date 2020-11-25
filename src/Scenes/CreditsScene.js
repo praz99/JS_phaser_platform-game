@@ -28,18 +28,16 @@ export default class CreditsScene extends Phaser.Scene {
 
     this.madeByText.setY(1000);
 
-    /* eslint-disable no-unused-expressions, func-names */
-
     this.creditsTween = this.tweens.add({
       targets: this.creditsText,
       y: -100,
       ease: 'Power1',
       duration: 3000,
       delay: 1000,
-      onComplete() {
-        this.destroy;
-      },
+      onComplete: this.destroy,
     });
+
+    /* eslint-disable no-unused-expressions */
 
     this.madeByTween = this.tweens.add({
       targets: this.madeByText,
@@ -47,12 +45,12 @@ export default class CreditsScene extends Phaser.Scene {
       ease: 'Power1',
       duration: 8000,
       delay: 1000,
-      onComplete: function () {
+      onComplete: function func() {
         this.madeByTween.destroy;
         this.scene.start('Title');
       }.bind(this),
     });
 
-    /* eslint-enable no-unused-expressions, func-names */
+    /* eslint-enable no-unused-expressions */
   }
 }
