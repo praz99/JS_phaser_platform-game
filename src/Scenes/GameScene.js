@@ -14,96 +14,69 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
-    // group with all active mountains.
     this.mountainGroup = this.add.group();
 
-    // group with all active platforms.
     this.platformGroup = this.add.group({
-
-      // once a platform is removed, it's added to the pool
       removeCallback(platform) {
         platform.scene.platformPool.add(platform);
       },
     });
 
-    // platform pool
     this.platformPool = this.add.group({
-
-      // once a platform is removed from the pool, it's added to the active platforms group
       removeCallback(platform) {
         platform.scene.platformGroup.add(platform);
       },
     });
 
-    // group with all active coins.
     this.coinGroup = this.add.group({
-
-      // once a coin is removed, it's added to the pool
       removeCallback(coin) {
         coin.scene.coinPool.add(coin);
       },
     });
 
-    // coin pool
     this.coinPool = this.add.group({
-
-      // once a coin is removed from the pool, it's added to the active coins group
       removeCallback(coin) {
         coin.scene.coinGroup.add(coin);
       },
     });
 
-    // group with all active firecamps.
     this.fireGroup = this.add.group({
 
-      // once a firecamp is removed, it's added to the pool
       removeCallback(fire) {
         fire.scene.firePool.add(fire);
       },
     });
 
-    // fire pool
     this.firePool = this.add.group({
-
-      // once a fire is removed from the pool, it's added to the active fire group
       removeCallback(fire) {
         fire.scene.fireGroup.add(fire);
       },
     });
 
-    // adding a mountain
     this.addMountains();
 
-    // keeping track of added platforms
     this.addedPlatforms = 0;
 
-    // number of consecutive jumps made by the player so far
     this.playerJumps = 0;
 
-    // adding a platform to the game, the arguments are platform width, x position and y position
     this.addPlatform(gameConfig.width,
       gameConfig.width / 2,
       gameConfig.height * gameOptions.platformVerticalLimit[1]);
 
-    // adding the player;
     this.player = this.physics.add.sprite(gameOptions.playerStartPosition, gameConfig.height * 0.7, 'player_run');
     this.player.setGravityY(gameOptions.playerGravity);
     this.player.setDepth(2);
 
-    // the player is not dying
     this.dying = false;
 
-    // setting collisions between the player and the platform group
     this.platformCollider = this.physics.add.collider(this.player,
       this.platformGroup,
       function func1() {
-        // play "run" animation if the player is on a platform
         if (!this.player.anims.isPlaying) {
           this.player.anims.play('run');
         }
       }, null, this);
 
-    // setting collisions between the player and the coin group
     this.physics.add.overlap(this.player, this.coinGroup, function func2(player, coin) {
       this.pickupMusic = this.sound.add('pickup', { volume: 0.5, loop: false });
       this.pickupMusic.play();
@@ -123,7 +96,6 @@ export default class GameScene extends Phaser.Scene {
       });
     }, null, this);
 
-    // setting collisions between the player and the fire group
     this.physics.add.overlap(this.player, this.fireGroup, function func3() {
       this.dieMusic = this.sound.add('dead', { volume: 0.5, loop: false });
       this.dieMusic.play();
@@ -133,14 +105,11 @@ export default class GameScene extends Phaser.Scene {
       this.physics.world.removeCollider(this.platformCollider);
     }, null, this);
 
-    // checking for input
     this.input.on('pointerdown', this.jump, this);
 
-    // scoring
     this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
   }
 
-  // adding mountains
   addMountains() {
     const rightmostMountain = this.getRightmostMountain();
     if (rightmostMountain < gameConfig.width * 2) {
@@ -156,7 +125,6 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  // getting rightmost mountain x position
   getRightmostMountain() {
     let rightmostMountain = -200;
     this.mountainGroup.getChildren().forEach((mountain) => {
@@ -165,7 +133,6 @@ export default class GameScene extends Phaser.Scene {
     return rightmostMountain;
   }
 
-  // the core of the script: platform are added from the pool or created on the fly
   addPlatform(platformWidth, posX, posY) {
     this.addedPlatforms += 1;
     let platform;
@@ -194,9 +161,7 @@ export default class GameScene extends Phaser.Scene {
       gameOptions.spawnRange[1],
     );
 
-    // if this is not the starting platform...
     if (this.addedPlatforms > 1) {
-      // is there a coin over the platform?
       if (Phaser.Math.Between(1, 100) <= gameOptions.coinPercent) {
         if (this.coinPool.getLength()) {
           const coin = this.coinPool.getFirst();
@@ -216,7 +181,6 @@ export default class GameScene extends Phaser.Scene {
         }
       }
 
-      // is there a fire over the platform?
       if (Phaser.Math.Between(1, 100) <= gameOptions.firePercent) {
         if (this.firePool.getLength()) {
           const fire = this.firePool.getFirst();
@@ -239,10 +203,6 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  // the player jumps when on the ground, or once in the air as long as there
-  // are jumps left and the first jump was on the ground
-  // and obviously if the player is not dying
-
   jump() {
     if ((!this.dying) && (this.player.body.touching.down
       || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps))) {
@@ -252,20 +212,17 @@ export default class GameScene extends Phaser.Scene {
       this.player.setVelocityY(gameOptions.jumpForce * -1);
       this.playerJumps += 1;
 
-      // stops run animation and play jump animation
       this.player.anims.play('jump', false);
     }
   }
 
   update() {
-    // game over
     if (this.player.y > gameConfig.height) {
       this.scene.start('GameOver', { user: gameConfig.user, score: this.score });
     }
 
     this.player.x = gameOptions.playerStartPosition;
 
-    // recycling platforms
     let minDistance = gameConfig.width;
     let rightmostPlatformHeight = 0;
     this.platformGroup.getChildren().forEach(function func4(platform) {
@@ -280,7 +237,6 @@ export default class GameScene extends Phaser.Scene {
       }
     }, this);
 
-    // recycling coins
     this.coinGroup.getChildren().forEach(function func5(coin) {
       if (coin.x < -coin.displayWidth / 2) {
         this.coinGroup.killAndHide(coin);
@@ -288,7 +244,6 @@ export default class GameScene extends Phaser.Scene {
       }
     }, this);
 
-    // recycling fire
     this.fireGroup.getChildren().forEach(function func6(fire) {
       if (fire.x < -fire.displayWidth / 2) {
         this.fireGroup.killAndHide(fire);
@@ -296,7 +251,6 @@ export default class GameScene extends Phaser.Scene {
       }
     }, this);
 
-    // recycling mountains
     this.mountainGroup.getChildren().forEach(function func7(mountain) {
       if (mountain.x < -mountain.displayWidth) {
         const rightmostMountain = this.getRightmostMountain();
@@ -309,7 +263,6 @@ export default class GameScene extends Phaser.Scene {
       }
     }, this);
 
-    // adding new platforms
     if (minDistance > this.nextPlatformDistance) {
       const nextPlatformWidth = Phaser.Math.Between(
         gameOptions.platformSizeRange[0],
