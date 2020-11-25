@@ -20,16 +20,39 @@
   },
   "homepage": "https://github.com/photonstorm/phaser3-project-template#readme",
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
     "axios": "^0.21.0",
     "phaser": "^3.3.0"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "setupFiles": [
+      "jest-canvas-mock"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "<rootDir>/test/mocks/styleMock.js",
+      "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/mocks/fileMock.js"
+    }
+  },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-modules-commonjs": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.3.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "jest": "^26.6.3",
+    "jest-canvas-mock": "^2.3.0",
     "raw-loader": "^0.5.1",
     "stylelint": "^13.3.3",
     "stylelint-config-standard": "^20.0.0",
@@ -38,5 +61,5 @@
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.11.0"
   },
-  "author": ""
+  "author": "Thapa"
 }
