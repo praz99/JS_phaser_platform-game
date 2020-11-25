@@ -30,5 +30,4 @@ const showScore = async () => {
   throw new Error('Error!');
 };
 
-
 export { sendScore, showScore };
