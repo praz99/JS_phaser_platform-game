@@ -35,7 +35,7 @@ it('limits player jump to 2 times', () => {
 
 it('returns platform spawn range', () => {
   expect(configOptions.gameOptions.spawnRange).toStrictEqual([80, 300]);
-})
+});
 
 it('gives minimum limit to platform spawn rate', () => {
   expect(configOptions.gameOptions.spawnRange[0]).toBe(80);
